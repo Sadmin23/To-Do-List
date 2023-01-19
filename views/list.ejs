@@ -7,10 +7,18 @@
     <title>To Do List</title>
   </head>
   <body>
-    <%if (Dday === "Friday" || Dday ==="Saturday") {%>
-    <h1 style="color: blue">It's a <%= Dday %></h1>
-    <%} else {%>
-    <h1 style="color: violet">It's a <%= Dday %></h1>
-    <%}%>
+    <h1><%= Dday %></h1>
+
+    <ul>
+      <li>Buy Food</li>
+      <li>Cook Food</li>
+      <li>Eat Food</li>
+      <li><%= newListitem %></li>
+    </ul>
+
+    <form action="/" method="post">
+      <input type="text" name="newItem" />
+      <button type="submit" name="button">Add</button>
+    </form>
   </body>
 </html>
