@@ -8,12 +8,10 @@
   </head>
   <body>
     <h1><%= Dday %></h1>
-
     <ul>
-      <li>Buy Food</li>
-      <li>Cook Food</li>
-      <li>Eat Food</li>
-      <li><%= newListitem %></li>
+      <%for (var i = 0; i < newListitems.length; i++){%>
+      <li><%= newListitems[i] %></li>
+      <%}%>
     </ul>
 
     <form action="/" method="post">
