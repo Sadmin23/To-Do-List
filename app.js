@@ -1,5 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const https = require("https");
+const { request } = require("http");
 const date = require(__dirname+"/date.js");
 
 const items = [];
@@ -46,6 +48,6 @@ app.get("/about", function(req, res){
   res.render("about");
 })
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("Server is running on port 3000");
 })
