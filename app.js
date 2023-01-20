@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-let items = ["Buy Food", "Cook Food", "Eat Food"];
+let items = [];
 let workItems = [];
 
 const app = express();
@@ -47,6 +47,10 @@ app.post("/", function(req, res){
 
 app.get("/work", function(req, res){
   res.render("list", {Title: "Work List", newListitems: workItems});
+})
+
+app.get("/about", function(req, res){
+  res.render("about");
 })
 
 app.listen(3000, function(){
