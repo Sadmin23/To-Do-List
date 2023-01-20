@@ -10,10 +10,10 @@
   </head>
   <body>
     <div class="box" id="heading">
-      <h1><%= Dday %></h1>
+      <h1><%= Title %></h1>
     </div>
     <div class="box">
-      <%for (var i = 0; i < newListitems.length; i++){%>
+      <%for (let i = 0; i < newListitems.length; i++){%>
       <div class="item">
         <input type="checkbox" />
         <p><%= newListitems[i] %></p>
@@ -27,7 +27,7 @@
           placeholder="New Item"
           autocomplete="off"
         />
-        <button type="submit" name="button">+</button>
+        <button type="submit" name="button" value="<%=Title%>">+</button>
       </form>
     </div>
   </body>
