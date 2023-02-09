@@ -20,7 +20,7 @@ const itemsSchema ={
 
 const item = mongoose.model("Item",itemsSchema);
 
-const item1 = new item({name: "Welcome to your todolist!"});
+const item1 = new item({name: "Welcome to your To Do List!"});
 
 const item2 = new item({name: "Hit the + button to add a new item."});
 
@@ -28,18 +28,23 @@ const item3 = new item({name: "<-- Hit this to delete an item"});
 
 const defaultItems = [item1, item2, item3];
 
-item.insertMany(defaultItems, function(err){
-  if (err){
-    console.log(err);
-  } else {
-    console.log("Successfully added items");
-  }
-});
-
 app.get("/", function(req, res) {
 
-  res.render("list", {listTitle: "Today", newListItems: items});
+  item.find({}, function(err, items){
 
+    if (items.length === 0){
+      item.insertMany(defaultItems, function(err){
+        if (err){
+          console.log(err);
+        } else {
+          console.log("Successfully added items");
+        }
+      });
+      res.redirect("/");
+    } else {
+      res.render("list", {listTitle: "Today", newListItems: items});
+    }
+  });
 });
 
 app.post("/", function(req, res){
