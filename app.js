@@ -28,6 +28,13 @@ const item3 = new item({name: "<-- Hit this to delete an item"});
 
 const defaultItems = [item1, item2, item3];
 
+const ListSchema = {
+  name: String,
+  items: [itemsSchema]
+};
+
+const List = mongoose.model("List", ListSchema);
+
 app.get("/", function(req, res) {
 
   item.find({}, function(err, items){
@@ -45,6 +52,30 @@ app.get("/", function(req, res) {
       res.render("list", {listTitle: "Today", newListItems: items});
     }
   });
+});
+
+app.get("/:customListName", function(req, res){
+  
+  console.log(req.params.customListName);
+
+  List.findOne({name: customListName}, function(err, foundList){
+    if (!err){
+      if(!foundList){
+        const List = new List({
+          name: customListName,
+          item: defaultItems
+        });
+      
+        List.save();
+        
+        res.redirect("/" + customListName);
+      
+      } else {
+        res.render("list", {listTitle: customListName, newListItems: foundList.items});
+      }
+    }
+  });
+
 });
 
 app.post("/", function(req, res){
@@ -68,10 +99,6 @@ app.post("/delete", function(req, res){
       res.redirect("/");
     }
   });
-});
-
-app.get("/work", function(req,res){
-  res.render("list", {listTitle: "Work List", newListItems: workItems});
 });
 
 app.get("/about", function(req, res){
